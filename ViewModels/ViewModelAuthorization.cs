@@ -15,17 +15,23 @@ using System.Windows.Threading;
 using CefSharp;
 using AIS_LAB.Pages;
 using System.Threading;
+using System.Configuration;
 
 namespace AIS_LAB.ViewModels
 {
-    class ViewModelAuthorization: INotifyPropertyChanged
+    class ViewModelAuthorization : INotifyPropertyChanged
     {
         private Pages.Authorization page;
-        private static string appId = "51785473";
+        private static string appId = ConfigurationManager.AppSettings.Get("AppId");
         private string address = "https://oauth.vk.com/authorize?client_id=" + appId +
             "&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope=friends offline&response_type=token&v=5.52";
         private string accessToken;
         private string userId;
+
+        public ViewModelAuthorization(Pages.Authorization page)
+        {
+            this.page = page;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -34,8 +40,9 @@ namespace AIS_LAB.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
-        public string Address { 
-            get 
+        public string Address
+        {
+            get
             {
                 return address;
             }
@@ -45,11 +52,6 @@ namespace AIS_LAB.ViewModels
                 OnPropertyChanged("Address");
             }
         }
-        
-        public ViewModelAuthorization(Pages.Authorization page)
-        {
-            this.page = page;
-        }
 
         public void Browser_FrameLoadEnd(object sender, CefSharp.FrameLoadEndEventArgs e)
         {
@@ -57,8 +59,11 @@ namespace AIS_LAB.ViewModels
             {
                 string url = Address.Replace("#", "&");
                 accessToken = HttpUtility.ParseQueryString(url).Get("access_token");
+                ConfigurationManager.AppSettings.Set("AccessToken", accessToken);
                 userId = HttpUtility.ParseQueryString(url).Get("user_id");
-                page.Dispatcher.Invoke(()=> page.NavigationService.Navigate(new Pages.App()));
+                ConfigurationManager.AppSettings.Set("UserId", userId);
+                page.Dispatcher.Invoke(() => page.NavigationService.Navigate(new Pages.App()));
+            }
         }
     }
 }

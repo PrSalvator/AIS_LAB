@@ -1,0 +1,48 @@
+﻿<Page x:Class="AIS_LAB.Pages.FriendDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AIS_LAB.Pages"
+      mc:Ignorable="d" 
+      Title="FriendDetails">
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Roboto"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </Page.Resources>
+    <Grid Background="Transparent" DataContext="{Binding Path=Friend, UpdateSourceTrigger=PropertyChanged}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" FontFamily="Roboto" 
+                   FontSize="28" Text="Подробная информация" 
+                   FontWeight="DemiBold" VerticalAlignment="Center"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center">
+            <Image Source="{Binding Path=PhotoUrl}" Width="80" Height="80"/>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{Binding Path=FirstName}" FontWeight="Black" FontSize="25"/>
+                <TextBlock Text="{Binding Path=LastName}" FontWeight="Black" FontSize="25"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text="Дата рождения"/>
+            <TextBlock FontWeight="Black" Text="{Binding Path=BDay}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <TextBlock Text="Пол"/>
+            <TextBlock FontWeight="Black" Text="{Binding Path=Sex}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <TextBlock Text="Город"/>
+            <TextBlock FontWeight="Black" Text="{Binding Path=City.Name}"/>
+        </StackPanel>
+    </Grid>
+</Page>

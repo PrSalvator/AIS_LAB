@@ -10,9 +10,7 @@ namespace AIS_LAB.ViewModels
 {
     class ViewModelButton
     {
-        private string appId = "51785473";
         private RelayCommand logInCommand;
-        private ChromiumWebBrowser browser;
         public RelayCommand LogInCommand
         {
             get

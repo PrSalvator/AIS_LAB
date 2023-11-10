@@ -13,5 +13,9 @@ namespace AIS_LAB
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+
+        }
     }
 }

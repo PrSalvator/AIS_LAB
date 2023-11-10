@@ -1,0 +1,37 @@
+﻿<Page x:Class="AIS_LAB.Pages.MutualFriends"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AIS_LAB.Pages"
+      mc:Ignorable="d" 
+      Title="MutualFriends"
+      >
+    <Page.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontFamily" Value="Roboto"/>
+        </Style>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Общие друзья" FontSize="28" 
+                   FontFamily="Roboto" Grid.Row="0"
+                   FontWeight="DemiBold"/>
+        <ListBox x:Name="Friends" ItemsSource="{Binding MutualFriendsList, UpdateSourceTrigger=PropertyChanged}" 
+                 Grid.Row="1" BorderThickness="0" Background="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="{Binding Path=PhotoUrl}" Margin="2" Width="100" Height="100"/>
+                        <TextBlock Text="{Binding Path=LastName}" Margin="2"/>
+                        <TextBlock Text="{Binding Path=FirstName}" Margin="2"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

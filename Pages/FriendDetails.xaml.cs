@@ -16,16 +16,15 @@ using System.Windows.Shapes;
 namespace AIS_LAB.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для App.xaml
+    /// Логика взаимодействия для FriendDetails.xaml
     /// </summary>
-    public partial class App : Page
+    public partial class FriendDetails : Page
     {
-        ViewModels.ViewModelApp vm;
-
-        public App()
+        ViewModels.ViewModelFriendDetails vm;
+        public FriendDetails(string friendId)
         {
-            vm = new ViewModels.ViewModelApp();
-            this.DataContext = vm;
+            vm = new ViewModels.ViewModelFriendDetails(friendId);
+            DataContext = vm;
             InitializeComponent();
         }
     }
